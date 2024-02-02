@@ -12,7 +12,7 @@ def index(request):
 def entry(request, title):
 
     if util.get_entry(title):
-        # Present user with a page that displays the content of the entry 
+        # Get content of entry, convert to html, and display it
         return HttpResponse(f"{markdown2.markdown(util.get_entry(title))}")
     else:
         return HttpResponse("")
