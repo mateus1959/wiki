@@ -12,7 +12,18 @@ def index(request):
 def entry(request, title):
 
     # Get the content of the encyclopedia entry -> util.get_entry(title)
-    # Convert markdown content to HTML -> markdown2.markdown(util.get_entry(title))
-    # Present user with a page that displays the content of the entry 
-    return HttpResponse(f"{markdown2.markdown(util.get_entry(title))}")
+    content = util.get_entry(title)
 
+    if content is not None:
+        # Present user with a page that displays the content of the entry 
+        return HttpResponse(f"{markdown2.markdown(content)}")
+
+def search(request):
+
+    form = request.GET
+    query = form.cleaned_data["q"]
+
+    return render(request, "encyclopedia/search.html", {
+        "entries": util.list_entries(),
+        "entry": query
+    })
