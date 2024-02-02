@@ -18,5 +18,8 @@ def entry(request, title):
     html = markdown2.markdown(entry)
 
     # Present user with a page that displays the content of the entry 
-    return HttpResponse(f"{html}")
+    return render(request, "encyclopedia/entry.html", {
+        "title": title,
+        "html": html
+    })
 
