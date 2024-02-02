@@ -17,6 +17,8 @@ def entry(request, title):
     if content is not None:
         # Present user with a page that displays the content of the entry 
         return HttpResponse(f"{markdown2.markdown(content)}")
+    else:
+        return HttpResponse("")
 
 def search(request):
 
