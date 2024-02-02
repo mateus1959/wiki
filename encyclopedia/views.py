@@ -11,12 +11,9 @@ def index(request):
 # Displays the contents of the encyclopedia entry 
 def entry(request, title):
 
-    # Get the content of the encyclopedia entry -> util.get_entry(title)
-    content = util.get_entry(title)
-
-    if content is not None:
+    if util.get_entry(title):
         # Present user with a page that displays the content of the entry 
-        return HttpResponse(f"{markdown2.markdown(content)}")
+        return HttpResponse(f"{markdown2.markdown(util.get_entry(title))}")
     else:
         return HttpResponse("")
 
