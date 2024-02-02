@@ -11,15 +11,8 @@ def index(request):
 # Displays the contents of the encyclopedia entry 
 def entry(request, title):
 
-    # Get the content of the encyclopedia entry 
-    entry = util.get_entry(title)
-
-    # Convert markdown content to HTML 
-    html = markdown2.markdown(entry)
-
+    # Get the content of the encyclopedia entry -> util.get_entry(title)
+    # Convert markdown content to HTML -> markdown2.markdown(util.get_entry(title))
     # Present user with a page that displays the content of the entry 
-    return render(request, "encyclopedia/entry.html", {
-        "title": title,
-        "html": html
-    })
+    return HttpResponse(f"{markdown2.markdown(util.get_entry(title))}")
 
